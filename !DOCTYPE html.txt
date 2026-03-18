@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Loan Against Property</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body { font-family: Arial; margin: 0; }
+
+    header {
+      background: linear-gradient(to right, #0a3d62, #3c6382);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    header h1 { font-size: 40px; }
+    header p { font-size: 18px; }
+
+    .btn {
+      background: #27ae60;
+      color: white;
+      padding: 12px 25px;
+      text-decoration: none;
+      margin-top: 10px;
+      display: inline-block;
+      border-radius: 5px;
+    }
+
+    section { padding: 40px; }
+
+    .box {
+      background: #f4f4f4;
+      padding: 20px;
+      margin: 10px 0;
+      border-radius: 10px;
+    }
+
+    input, select {
+      padding: 10px;
+      margin: 5px;
+      width: 220px;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #25D366;
+      color: white;
+      padding: 15px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Unlock the Value of Your Property</h1>
+  <p>Get high-value loans at low interest rates</p>
+  <a href="#emi" class="btn">Check EMI</a>
+</header>
+
+<section>
+  <h2> Loan Features</h2>
+  <div class="box">✔ Loan up to 75% of property value</div>
+  <div class="box">✔ Interest rate: 11% – 18%</div>
+  <div class="box">✔ Tenure: Up to 15 years</div>
+  <div class="box">✔ Fast approval</div>
+</section>
+
+<section id="emi">
+  <h2>🧮 EMI Calculator</h2>
+
+  <input type="number" id="amount" placeholder="Loan Amount"><br>
+
+  <select id="rate">
+    <option value="11">11%</option>
+    <option value="12">12%</option>
+    <option value="13">13%</option>
+    <option value="14">14%</option>
+    <option value="15">15%</option>
+    <option value="16">16%</option>
+    <option value="17">17%</option>
+    <option value="18">18%</option>
+  </select><br>
+
+  <input type="number" id="time" value="15" readonly><br>
+
+  <button onclick="calculateEMI()" class="btn">Calculate EMI</button>
+
+  <h3 id="emi"></h3>
+  <h3 id="interest"></h3>
+  <h3 id="total"></h3>
+
+  <a id="whatsappShare" class="btn" target="_blank" style="display:none;">
+     Send to WhatsApp
+  </a>
+</section>
+
+<section>
+  <h2> Contact Us</h2>
+  <p> Phone: <a href="tel:+918219901736">8219901736</a></p>
+  <p> Email: <a href="mailto:panku6057@gmail.com">panku6057@gmail.com</a></p>
+  <p> Location: Mandi, Himachal Pradesh</p>
+</section>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/918219901736" class="whatsapp" target="_blank">
+   Chat
+</a>
+
+<footer>
+  <p>© 2026 Loan Against Property</p>
+</footer>
+
+<script>
+function calculateEMI() {
+  let P = document.getElementById("amount").value;
+  let annualRate = document.getElementById("rate").value;
+  let R = annualRate / 12 / 100;
+  let N = document.getElementById("time").value * 12;
+
+  let EMI = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
+  let totalPayment = EMI * N;
+  let totalInterest = totalPayment - P;
+
+  document.getElementById("emi").innerHTML =
+    "Monthly EMI: ₹ " + EMI.toFixed(2);
+
+  document.getElementById("interest").innerHTML =
+    "Total Interest: ₹ " + totalInterest.toFixed(2);
+
+  document.getElementById("total").innerHTML =
+    "Total Payment: ₹ " + totalPayment.toFixed(2);
+
+  let message = `Loan Details:%0AAmount: ₹${P}%0AInterest: ${annualRate}%25%0ATenure: 15 Years%0AEMI: ₹${EMI.toFixed(2)}`;
+
+  let url = "https://wa.me/918219901736?text=" + message;
+
+  let btn = document.getElementById("whatsappShare");
+  btn.href = url;
+  btn.style.display = "inline-block";
+}
+</script>
+
+</body>
+</html>
